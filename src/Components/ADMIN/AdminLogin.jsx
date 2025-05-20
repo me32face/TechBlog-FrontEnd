@@ -10,6 +10,9 @@ function AdminLogin() {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+
   const handleLoginSuccess = () => {
     sessionStorage.setItem("isAdminLoggedIn", true);
     Swal.fire({
@@ -30,7 +33,7 @@ function AdminLogin() {
     e.preventDefault();
 
     axios
-      .post("http://localhost:3003/Techblog/AdminLogin", { username, password })
+      .post(`${API_BASE_URL}/AdminLogin`, { username, password })
       .then((response) => {
         handleLoginSuccess();
       })

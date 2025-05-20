@@ -6,10 +6,11 @@ import "../../Assets/Styles/AllPosts.css";
 
 function AllPosts() {
   const [posts, setPosts] = useState([]);
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
 
   useEffect(() => {
     axios
-      .get("http://localhost:3003/Techblog/AllPosts")
+      .get(`${API_BASE_URL}AllPosts`)
       .then(res => setPosts(res.data.data))
       .catch(err => console.error("Failed to fetch posts", err));
   }, []);

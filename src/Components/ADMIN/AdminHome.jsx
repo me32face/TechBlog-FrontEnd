@@ -9,6 +9,9 @@ function AdminHome() {
   const isAdmin = sessionStorage.getItem("isAdminLoggedIn");
   const navigate = useNavigate();
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+
   useEffect(() => {
     if (!isAdmin) {
       Swal.fire({
@@ -30,15 +33,15 @@ function AdminHome() {
   const [currentPost, setCurrentPost] = useState(null);
 
   const fetchDashboardData = () => {
-    axios.post("http://localhost:3003/Techblog/ViewUserData")
+    axios.post(`${API_BASE_URL}/ViewUserData`)
       .then(res => setTotalUsers(res.data.data.length))
       .catch(err => console.error("Error loading users:", err));
 
-    axios.get("http://localhost:3003/Techblog/AllPosts")
+    axios.get(`${API_BASE_URL}/AllPosts`)
       .then(res => setPosts(res.data.data.length))
       .catch(err => console.error("Error loading posts", err));
 
-    axios.get("http://localhost:3003/Techblog/admin/pending-posts")
+    axios.get(`${API_BASE_URL}/pending-posts`)
       .then(res => {
         setNumOfPendingPost(res.data.data.length);
         if (Array.isArray(res.data.data)) {
@@ -53,7 +56,7 @@ function AdminHome() {
   }, []);
 
   const handleApprove = (postId) => {
-    axios.put(`http://localhost:3003/Techblog/admin/approve-posts/${postId}`)
+    axios.put(`${API_BASE_URL}/admin/approve-posts/${postId}`)
       .then(res => {
         const updated = pendingPosts.filter(post => post._id !== postId);
         setPendingPosts(updated);
@@ -77,7 +80,7 @@ function AdminHome() {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3003/Techblog/DeletePost/${postId}`)
+        axios.delete(`${API_BASE_URL}DeletePost/${postId}`)
           .then(() => {
             const updated = pendingPosts.filter(post => post._id !== postId);
             setPendingPosts(updated);

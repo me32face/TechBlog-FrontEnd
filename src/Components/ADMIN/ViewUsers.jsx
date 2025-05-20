@@ -11,6 +11,8 @@ function ViewUsers() {
 
   const isAdmin = sessionStorage.getItem("isAdminLoggedIn");
   const navigate = useNavigate();
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
 
   useEffect(() => {
     if (!isAdmin) {
@@ -29,7 +31,7 @@ function ViewUsers() {
 
   useEffect(() => {
     axios
-      .post('http://localhost:3003/TechBlog/ViewUsers')
+      .post(`${API_BASE_URL}/ViewUsers`)
       .then((res) => {
         setUsers(res.data.data);
       })
@@ -50,7 +52,7 @@ function ViewUsers() {
   }).then((result) => {
     if (result.isConfirmed) {
       axios
-        .delete(`http://localhost:3003/TechBlog/DeleteUser/${userId}`)
+        .delete(`${API_BASE_URL}/DeleteUser/${userId}`)
         .then((res) => {
           if (res.data.status === 200) {
             Swal.fire("Deleted!", res.data.msg, "success");

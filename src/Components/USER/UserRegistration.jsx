@@ -26,6 +26,9 @@ function UserRegistration() {
         }
     }, [loginId, Navigate, Swal]);
 
+    const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+
     const [formData,setFormData]=useState({
         fullName:"",
         email:"",
@@ -92,7 +95,7 @@ function UserRegistration() {
         }
 
         axios
-        .post('http://localhost:3003/TechBlog/userRegistration',formData,{headers:{"Content-Type" :"multipart/form-data"}})
+        .post(`${API_BASE_URL}/userRegistration`,formData,{headers:{"Content-Type" :"multipart/form-data"}})
         .then((up)=>{
             console.log(up);
             if(up.data.status===200){

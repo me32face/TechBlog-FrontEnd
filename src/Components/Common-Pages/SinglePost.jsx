@@ -11,9 +11,11 @@ function SinglePost() {
   const { id } = useParams();
   const [post, setPost] = useState(null);
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     axios
-      .post(`http://localhost:3003/Techblog/GetPostById/${id}`)
+      .post(`${API_BASE_URL}/GetPostById/${id}`)
       .then((res) => {
         setPost(res.data.data);
       })

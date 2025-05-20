@@ -8,6 +8,9 @@ import Swal from 'sweetalert2';
 
 
 function EditPost() {
+  
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   const { id } = useParams();
   const navigate = useNavigate();
   const [postData, setPostData] = useState({
@@ -20,7 +23,7 @@ function EditPost() {
 
   useEffect(() => {
     axios
-      .post(`http://localhost:3003/Techblog/GetPostById/${id}`)
+      .post(`${API_BASE_URL}/GetPostById/${id}`)
       .then((res) => {
         const post = res.data.data;
         setPostData({
@@ -42,7 +45,7 @@ function EditPost() {
   const handleUpdate = (e) => {
     e.preventDefault();
     axios
-      .put(`http://localhost:3003/Techblog/UpdatePost/${id}`, postData)
+      .put(`${API_BASE_URL}/UpdatePost/${id}`, postData)
       .then((res) => {
         if (res.status === 200) {
           Swal.fire({

@@ -9,9 +9,11 @@ function Home() {
   const userName = localStorage.getItem("username");
   const [allPosts, setAllPosts] = useState([]);
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   useEffect(() => {
     axios
-      .get("http://localhost:3003/Techblog/AllPosts")
+      .get(`${API_BASE_URL}/AllPosts`)
       .then((response) => {
         setAllPosts(response.data.data);
       })

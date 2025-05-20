@@ -43,7 +43,7 @@ function UserProfile() {
 
   useEffect(() => {
     axios
-      .post(`http://localhost:3003/TechBlog/UserProfile/${loginId}`)
+      .post(`${API_BASE_URL}/UserProfile/${loginId}`)
       .then((res) => {
         setUser(res.data.data);
       })
@@ -60,9 +60,12 @@ function UserProfile() {
       });
   }, [loginId]);
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+
   useEffect(() => {
     axios
-      .post(`http://localhost:3003/TechBlog/UsersPosts/${loginId}`)
+      .post(`${API_BASE_URL}/UsersPosts/${loginId}`)
       .then((res) => {
                 console.log(res.data);
         setPosts(res.data.data);
@@ -90,7 +93,8 @@ function UserProfile() {
   };
 
   const handleUpdate = () => {
-    axios.put(`http://localhost:3003/TechBlog/UpdateUserProfile/${loginId}`, editUser)
+    axios
+      .put(`${API_BASE_URL}/UpdateUserProfile/${loginId}`, editUser)
       .then((res) => {        
         alert("Profile updated successfully");
         setUser(res.data.data);
@@ -118,7 +122,7 @@ function UserProfile() {
     };
   
     axios
-      .put(`http://localhost:3003/TechBlog/UpdateUserProfile/${loginId}`, updatedData)
+      .put(`${API_BASE_URL}/UpdateUserProfile/${loginId}`, updatedData)
       .then((res) => {
         Swal.fire({
           title: 'Success!',
@@ -161,7 +165,8 @@ function UserProfile() {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3003/TechBlog/DeletePost/${postId}`)
+        axios
+          .delete(`${API_BASE_URL}/DeletePost/${postId}`)
           .then((e) => {
             console.log(e);
             

@@ -12,6 +12,9 @@ function ManagePosts() {
   const isAdmin = sessionStorage.getItem("isAdminLoggedIn");
   const navigate = useNavigate();
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+
   useEffect(() => {
     if (!isAdmin) {
       Swal.fire({
@@ -29,7 +32,7 @@ function ManagePosts() {
 
   useEffect(() => {
     axios
-    .get("http://localhost:3003/Techblog/AllPosts")
+    .get(`${API_BASE_URL}AllPosts`)
     .then(res => setPosts(res.data.data))
     .catch(err => console.error("Error fetching posts", err));
   }, []);
@@ -46,7 +49,7 @@ function ManagePosts() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3003/Techblog/DeletePost/${id}`)
+          .delete(`${API_BASE_URL}/DeletePost/${id}`)
           .then((response) => {
             console.log(response);
             setPosts(posts.filter((post) => post._id !== id));

@@ -25,6 +25,8 @@ function NewPost() {
 
   const usersId = localStorage.getItem("userId");
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   const [newPostData, setNewPostData] = useState({
     userId: `${usersId}`,
     title: '',
@@ -59,7 +61,7 @@ function NewPost() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .post('http://localhost:3003/TechBlog/AddPost/', newPostData, {
+          .post(`${API_BASE_URL}/AddPost`, newPostData, {
             headers: { "Content-Type": "multipart/form-data" }
           })
           .then((up) => {

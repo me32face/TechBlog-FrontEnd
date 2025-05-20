@@ -11,6 +11,9 @@ function UserLogin() {
   const navigate = useNavigate();
   const loginId = localStorage.getItem("userId");
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
+
   useEffect(() => {
       if (loginId) {
           Swal.fire({
@@ -55,7 +58,7 @@ function UserLogin() {
     }
 
     axios
-      .post('http://localhost:3003/TechBlog/userLogin', formData)
+      .post(`${API_BASE_URL}/userLogin`, formData)
       .then((up) => {
         if (up.data.status === 200) {
           localStorage.setItem("userId", up.data.data._id);

@@ -8,6 +8,9 @@ import Footer from '../STATIC/Footer';
 
 
 function ForgotPassword() {
+
+  const API_BASE_URL = process.env.REACT_APP_API_URL;
+
   const [formData, setFormData] = useState({
     email: '',
     password: '',
@@ -45,7 +48,7 @@ function ForgotPassword() {
     }
 
     axios
-      .post('http://localhost:3003/TechBlog/ForgotPassword', formData)
+      .post(`${API_BASE_URL}/ForgotPassword`, formData)
       .then((res) => {
         if (res.data.status === 200) {
           Swal.fire({
