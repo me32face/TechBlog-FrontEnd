@@ -1,0 +1,146 @@
+.UserProfile-Main-Page {
+    padding: 20px;
+    background-image: url("https://images.squarespace-cdn.com/content/v1/64d2c78425d0880d22fe3934/ccd5fb87-2d68-47ec-bfb2-b98080a08dda/AdobeStock_213567841.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.profile-container {
+    margin-top: 20px;
+}
+
+.profile-card {
+    background-color: #f9f9f9;
+}
+
+.profile-picture-user {
+    object-fit: contain;
+    max-height: 300px;
+}
+
+.profile-info {
+    padding: 20px;
+}
+
+.user-posts-section {
+    margin-top: 40px;
+}
+
+.user-post-card img {
+    object-fit: fill;
+    height: 200px;
+}
+
+.user-post-card {
+    transition: transform 0.3s ease;
+}
+
+.user-post-card:hover {
+    transform: translateY(-5px);
+}
+
+.your-post-h2-userprofile{
+    color: white;
+}
+
+.custom-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1050;
+}
+
+.custom-modal {
+    background-color: #ffffff;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+    max-height: 90vh;
+}
+
+.custom-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.custom-modal-header h2 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.close-btn {
+    font-size: 1.4rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.custom-modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.custom-modal-body input,
+.custom-modal-body textarea {
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    width: 100%;
+}
+
+.custom-modal-body textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.modal-cancel-btn {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-save-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.modal-cancel-btn:hover,
+.modal-save-btn:hover {
+    opacity: 0.9;
+}
+
+.post-handle-userProfile{
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

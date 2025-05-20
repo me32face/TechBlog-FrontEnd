@@ -1,0 +1,325 @@
+/* MAIN NAVBAR CONTAINER */
+.mainNavbar {
+  width: 100%;
+  z-index: 1000;
+  position: sticky;
+  top: 0;
+}
+
+/* NAVBAR BACKGROUND */
+.custom-navbar-bg {
+  background-color: #061e34 !important; /* Deep navy */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1) !important;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+}
+
+/* BRAND NAME */
+.custom-navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00aaff;
+  font-style: italic;
+  transition: transform 0.3s ease;
+}
+
+.custom-navbar-brand:hover {
+  color: #00ccff;
+  text-decoration: none;
+  animation: pulseBrand 0.8s ease-in-out;
+}
+
+.custom-navbar-brand::selection {
+  color: #00ccff;
+  text-decoration: none;
+  animation: pulseBrand 0.8s ease-in-out;
+}
+
+@keyframes pulseBrand {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* NAV LINKS */
+.custom-navbar-link {
+  color: #ffffff !important;
+  margin-right: 10px;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  animation: fadeInNav 0.6s ease-in-out;
+  transition: color 0.3s ease;
+}
+
+.custom-navbar-link:hover {
+  color: #00ffff !important;
+  text-shadow: 0 0 6px #00ffff;
+}
+
+@keyframes fadeInNav {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* UNDERLINE ANIMATION */
+.custom-navbar-link::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  bottom: -4px;
+  left: 0;
+  background: linear-gradient(90deg, #00ffff, #00aaff);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+
+.custom-navbar-link:hover::after {
+  transform: scaleX(1);
+}
+
+/* ACTIVE LINK INDICATOR */
+.custom-active-link {
+  color: #00ffff !important;
+  font-weight: 600;
+}
+
+.custom-active-link::after {
+  transform: scaleX(1);
+}
+
+/* DROPDOWN MENU */
+.custom-dropdown-bg {
+  background-color: #0b2a45 !important;
+  border-radius: 0 0 8px 8px;
+  border: none;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.custom-dropdown-item {
+  color: #ffffff !important;
+  padding: 8px 16px;
+}
+
+.custom-dropdown-item:hover {
+  background-color: #014d7a !important;
+  color: #ffffff !important;
+}
+
+/* FIX DROPDOWN TOGGLE ARROW */
+.custom-navbar-link.dropdown-toggle::after {
+  margin-left: 6px;
+  vertical-align: middle;
+  color: #e0e1dd !important;
+  font-size: 0.6rem;
+  transition: transform 0.3s ease;
+}
+
+.nav-item.dropdown:hover .dropdown-toggle::after {
+  color: #00aaff !important;
+}
+
+/* SEARCH FORM STYLES */
+.custom-search-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.custom-search-input {
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  padding: 6px 12px;
+  width: 160px;
+  font-size: 0.9rem;
+  font-size: 12px;
+}
+
+.custom-search-btn {
+  background: linear-gradient(to right, #00aaff, #0077cc) !important;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  height: 32px;
+  transition: background 0.3s ease !important;
+}
+
+.custom-search-btn:hover {
+  background: linear-gradient(to right, #0077cc, #005f99) !important;
+}
+
+/* LOGIN BUTTON */
+.custom-login-btn {
+  background-color: #00cc11 !important;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-right: 0px !important;
+  height: 32px;
+  transition: background-color 0.3s ease;
+}
+
+
+.custom-login-btn:hover {
+  background-color: #cfe814 !important;
+}
+
+.custom-login-btn-register{
+  background-color: #00b4cc !important;
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-right: 0px !important;
+  height: 32px;
+  transition: background-color 0.3s ease;
+}
+
+.custom-login-btn-register:hover{
+  background-color: #14e882 !important;
+}
+
+  .custom-login-btn, 
+  .custom-login-btn-register{
+    margin: 10px;
+  }
+
+
+
+/* LOGOUT BUTTON */
+.btn-outline-danger {
+  height: 32px;
+  font-size: 0.9rem;
+  border-radius: 20px;
+}
+
+/* COLLAPSE FIX FOR MOBILE VIEW */
+@media (max-width: 991px) {
+  .custom-search-wrapper {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .custom-login-btn, 
+  .custom-login-btn-register{
+    width: 100%;
+    margin: 10px;
+  }
+
+  .custom-search-input {
+    width: 100%;
+  }
+}
+
+
+@media (max-width: 991px) {
+  .custom-navbar-toggler {
+    width: 100%;
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .custom-search-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 1rem 1.2rem;
+  }
+
+  .custom-search-input,
+  .custom-search-button,
+  .custom-user-button,
+  .custom-logout-button {
+    width: 100%;
+    margin-bottom: 0.6rem;
+    border-radius: 12px;
+  }
+
+  .custom-search-button {
+    background-color: #1976d2;
+    color: white;
+  }
+
+  .custom-user-button {
+    background-color: #4caf50;
+    color: white;
+  }
+
+  .custom-logout-button {
+    background-color: transparent;
+    color: crimson;
+    border: 1px solid crimson;
+  }
+
+  .custom-logout-button:hover {
+    background-color: crimson;
+    color: white;
+  }
+
+  .navbar-nav .nav-link {
+    padding: 0.6rem 1rem;
+    text-align: center;
+  }
+}
+
+.logout-button-nav{
+  background-color: #005e9900;
+  border:none;
+  display: flex;
+}
+
+.profile-icon-nav{
+  text-decoration: none;
+  color: white;
+  font-family: cursive;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+
+}
+
+.profile-icon-nav:hover{
+  transform: scale(1.2);
+  color: hotpink;
+}
+
+.logout-icon-nav:hover{
+  transform: scale(1.4);
+  color: red !important;
+}
+
+.animated-username {
+  font-weight: bold;
+  color: #ddf507;
+  text-decoration: none;
+  transition: transform 0.3s ease, text-shadow 0.3s ease;
+}
+
+
+.animated-username:hover {
+  transform: scale(1.05);
+  text-shadow: 0 0 10px #23f507, 0 0 20px #23f507;
+  color: rgb(212, 0, 255);
+}

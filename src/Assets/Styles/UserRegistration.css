@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, input, button {
+  font-family: 'Poppins', sans-serif;
+}
+
+.registration-form-background {
+  background-color: #a993c1;
+  padding: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.registration-form-main {
+  background-color: #fff;
+  padding: 20px 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  width: 100%;
+  max-width: 440px;
+  transition: max-width 0.3s ease;
+  line-height: 1;
+}
+
+@media (min-width: 1024px) {
+  .registration-form-main {
+    max-width: 500px;
+  }
+}
+
+.registration-form-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1c2a39;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.registration-form-group {
+  margin-bottom: 14px;
+}
+
+.registration-label {
+  display: block;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.registration-input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  transition: border 0.3s;
+}
+
+.registration-input:focus {
+  border-color: #4a90e2;
+  outline: none;
+  background-color: #fff;
+}
+
+.registration-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #228be6;
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(34, 139, 230, 0.3);
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.registration-button:hover {
+  background-color: #1c7ed6;
+  transform: translateY(-1px);
+}
+
+.registration-link {
+  padding: 20px;
+  font-size: 14px;
+  color: #228be6;
+  text-decoration: none;
+}
+
+.registration-link:hover {
+  text-decoration: underline;
+  color: #1c7ed6;
+}

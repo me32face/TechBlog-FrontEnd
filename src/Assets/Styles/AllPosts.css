@@ -1,0 +1,90 @@
+.allposts-wrapper {
+  padding: 40px 0;
+  background-color: #f8f9fa;
+  background-image: url("https://t3.ftcdn.net/jpg/05/14/95/12/360_F_514951224_2dxMLbIw5qNRdPGD003chpbVcxWtcp7K.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.allposts-page-title {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #f7eeee;
+}
+
+.allposts-col {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.fade-in-card {
+  animation: fadeInUp 1s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.allposts-card {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+  transition: transform 0.6s;
+  min-height: 600px;
+  max-height: 600px;
+}
+
+.allposts-card:hover {
+  transform: translateY(-6px);
+}
+
+.allposts-image {
+  height: 200px;
+  object-fit: fill;
+}
+
+.allposts-post-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.allposts-author,
+.allposts-date,
+.allposts-category,
+.allposts-tags {
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 6px;
+}
+
+.allposts-snippet {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.allposts-btn {
+  background-color: #007bff;
+  color: white;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 6px 16px;
+  transition: background-color 0.3s;
+}
+
+.allposts-btn:hover {
+  background-color: #0056b3;
+  color: rgb(51, 255, 0);
+}
+
+.viewMore-btn-allPosts{
+  padding: 20px;
+  padding-top: 0px;
+}
