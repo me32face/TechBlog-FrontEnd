@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import '../../Assets/Styles/AdminLogin.css';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 
 function AdminLogin() {
@@ -12,33 +11,58 @@ function AdminLogin() {
 
   const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-
   const handleLoginSuccess = () => {
     sessionStorage.setItem("isAdminLoggedIn", true);
     Swal.fire({
       title: 'Logged in ✅!',
       text: 'Welcome',
       icon: 'success',
-      timer: 500,
+      timer: 1000,
       timerProgressBar: true,
       showConfirmButton: false
-    })
-    .then(() => {
-    navigate('/dashboard');
+    }).then(() => {
+      navigate('/dashboard');
     });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError('');  // clear previous errors
 
-    axios
-      .post(`${API_BASE_URL}/AdminLogin`, { username, password })
-      .then((response) => {
-        handleLoginSuccess();
+    fetch(`${API_BASE_URL}/AdminLogin`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    })
+      .then(res => {
+        if (res.status === 200) {
+          handleLoginSuccess();
+        } else if (res.status === 401) {
+          setError('Invalid credentials');
+          Swal.fire({
+            title: 'Login Failed',
+            text: 'Invalid username or password',
+            icon: 'error',
+            confirmButtonText: 'Try Again'
+          });
+        } else {
+          setError('Something went wrong');
+          Swal.fire({
+            title: 'Error',
+            text: 'Something went wrong, please try again later',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        }
       })
-      .catch((error) => {
-        setError("Invalid username or password.");
+      .catch(() => {
+        setError('Network error');
+        Swal.fire({
+          title: 'Network Error',
+          text: 'Please check your internet connection and try again',
+          icon: 'error',
+          confirmButtonText: 'Ok'
+        });
       });
   };
 
@@ -61,6 +85,7 @@ function AdminLogin() {
             className="techblog-admin-input"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
           />
         </div>
 
@@ -74,6 +99,7 @@ function AdminLogin() {
             className="techblog-admin-input"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
           />
         </div>
 
