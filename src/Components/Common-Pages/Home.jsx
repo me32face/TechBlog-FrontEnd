@@ -42,35 +42,36 @@ function Home() {
       <section id="recent-posts" className="all-posts-section">
         <h2 className="mb-4">Recent Posts</h2>
         <div className="row">
-          {allPosts
-          .slice()
-          .reverse()
-          .map((post) => (
-            <div className="col-md-4 mb-4" key={post._id}>
-              <div className="card all-post-card">
-                <img
-                  src={post.image ? post.image : "fallback-image-url-or-placeholder.png"}
-                  className="card-img-top"
-                  alt={post.title}
-                />
-                <div className="card-body">
-                  <h5 className="card-title">{post.title.substring(0, 75)}</h5>
-                  <p className="card-text">
-                    By <strong>{post.userDetails?.username}</strong>
-                  </p>
-                  <p className="card-text">
-                    {post.content.substring(0, 150)}...
-                  </p>
+          {Array.isArray(allPosts) && allPosts.length > 0 ? (
+            allPosts
+              .slice()
+              .reverse()
+              .map((post) => (
+                <div className="col-md-4 mb-4" key={post._id}>
+                  <div className="card all-post-card">
+                    <img
+                      src={post.image ? post.image : "fallback-image-url-or-placeholder.png"}
+                      className="card-img-top"
+                      alt={post.title}
+                    />
+                    <div className="card-body">
+                      <h5 className="card-title">{post.title.substring(0, 75)}</h5>
+                      <p className="card-text">
+                        By <strong>{post.userDetails?.username}</strong>
+                      </p>
+                      <p className="card-text">
+                        {post.content.substring(0, 150)}...
+                      </p>
+                    </div>
+                    <div className="viewMore-div-home">
+                      <a href={`/post/${post._id}`} className="btn btn-primary viewMore-btn-home">
+                        View More
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <div className="viewMore-div-home">
-                  <a href={`/post/${post._id}`} className="btn btn-primary viewMore-btn-home">
-                      View More 
-                  </a>
-                </div>
-              </div>
-            </div>
-          ))}
-          {allPosts.length === 0 && (
+              ))
+          ) : (
             <p className="text-muted">No posts available.</p>
           )}
         </div>
