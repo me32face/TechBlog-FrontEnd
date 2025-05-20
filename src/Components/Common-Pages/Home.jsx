@@ -15,6 +15,7 @@ function Home() {
     axios
       .get(`${API_BASE_URL}/AllPosts`)
       .then((response) => {
+        console.log("API response data:", response);
         setAllPosts(response.data.data);
       })
       .catch((error) => {

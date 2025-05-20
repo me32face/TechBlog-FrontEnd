@@ -10,7 +10,7 @@ function AllPosts() {
 
   useEffect(() => {
     axios
-      .get(`${API_BASE_URL}AllPosts`)
+      .get(`${API_BASE_URL}/AllPosts`)
       .then(res => setPosts(res.data.data))
       .catch(err => console.error("Failed to fetch posts", err));
   }, []);
