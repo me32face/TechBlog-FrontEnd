@@ -3,7 +3,7 @@ import axios from "axios";
 import "../../Assets/Styles/AdminHome.css";
 import AdminNavbar from "./AdminNavbar";
 import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function AdminHome() {
   const isAdmin = sessionStorage.getItem("isAdminLoggedIn");
@@ -11,19 +11,18 @@ function AdminHome() {
 
   const API_BASE_URL = process.env.REACT_APP_API_URL;
 
-
   useEffect(() => {
     if (!isAdmin) {
       Swal.fire({
-        title: 'Restricted!',
-        text: 'If you are an Admin, please login',
-        icon: 'error',
+        title: "Restricted!",
+        text: "If you are an Admin, please login",
+        icon: "error",
         timerProgressBar: true,
-        showConfirmButton: true
+        showConfirmButton: true,
       });
       navigate("/AdminLogin");
     }
-  }, []);
+  }, [isAdmin, navigate]);
 
   const [totalUsers, setTotalUsers] = useState(0);
   const [posts, setPosts] = useState(0);
@@ -33,22 +32,25 @@ function AdminHome() {
   const [currentPost, setCurrentPost] = useState(null);
 
   const fetchDashboardData = () => {
-    axios.post(`${API_BASE_URL}/ViewUserData`)
-      .then(res => setTotalUsers(res.data.data.length))
-      .catch(err => console.error("Error loading users:", err));
+    axios
+      .post(`${API_BASE_URL}/ViewUserData`)
+      .then((res) => setTotalUsers(res.data.data.length))
+      .catch((err) => console.error("Error loading users:", err));
 
-    axios.get(`${API_BASE_URL}/AllPosts`)
-      .then(res => setPosts(res.data.data.length))
-      .catch(err => console.error("Error loading posts", err));
+    axios
+      .get(`${API_BASE_URL}/AllPosts`)
+      .then((res) => setPosts(res.data.data.length))
+      .catch((err) => console.error("Error loading posts", err));
 
-    axios.get(`${API_BASE_URL}/pending-posts`)
-      .then(res => {
+    axios
+      .get(`${API_BASE_URL}/admin/pending-posts`)
+      .then((res) => {
         setNumOfPendingPost(res.data.data.length);
         if (Array.isArray(res.data.data)) {
           setPendingPosts(res.data.data);
         }
       })
-      .catch(err => console.error("Error fetching pending posts:", err));
+      .catch((err) => console.error("Error fetching pending posts:", err));
   };
 
   useEffect(() => {
@@ -56,49 +58,58 @@ function AdminHome() {
   }, []);
 
   const handleApprove = (postId) => {
-    axios.put(`${API_BASE_URL}/admin/approve-posts/${postId}`)
-      .then(res => {
-        const updated = pendingPosts.filter(post => post._id !== postId);
+    axios
+      .put(`${API_BASE_URL}/admin/approve-posts/${postId}`)
+      .then(() => {
+        const updated = pendingPosts.filter((post) => post._id !== postId);
         setPendingPosts(updated);
-        setNumOfPendingPost(prev => prev - 1);
-        setPosts(prev => prev + 1);
+        setNumOfPendingPost((prev) => prev - 1);
+        setPosts((prev) => prev + 1);
         setCurrentPost(null);
-        fetchDashboardData();
+
+        Swal.fire({
+          title: "Approved!",
+          text: "Post has been approved successfully.",
+          icon: "success",
+          timer: 1000,
+          timerProgressBar: true,
+          showConfirmButton: false,
+        });
       })
-      .catch(err => console.error("Error approving post:", err));
+      .catch((err) => console.error("Error approving post:", err));
   };
 
-  // New function to delete post
   const handleDelete = (postId) => {
     Swal.fire({
-      title: 'Are you sure?',
-      text: 'This post will be permanently deleted!',
-      icon: 'warning',
+      title: "Are you sure?",
+      text: "This post will be permanently deleted!",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete it!',
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${API_BASE_URL}DeletePost/${postId}`)
+        axios
+          .delete(`${API_BASE_URL}/DeletePost/${postId}`)
           .then(() => {
-            const updated = pendingPosts.filter(post => post._id !== postId);
+            const updated = pendingPosts.filter((post) => post._id !== postId);
             setPendingPosts(updated);
-            setNumOfPendingPost(prev => prev - 1);
+            setNumOfPendingPost((prev) => prev - 1);
             setCurrentPost(null);
+
             Swal.fire({
-              title: 'Deleted!',
-              text: 'Post has been deleted.',
-              icon: 'success',
+              title: "Deleted!",
+              text: "Post has been deleted.",
+              icon: "success",
               timer: 1000,
               timerProgressBar: true,
               showConfirmButton: false,
             });
-            fetchDashboardData();
           })
-          .catch(err => {
-            console.error('Error deleting post:', err);
-            Swal.fire('Error', 'Failed to delete the post.', 'error');
+          .catch((err) => {
+            console.error("Error deleting post:", err);
+            Swal.fire("Error", "Failed to delete the post.", "error");
           });
       }
     });
@@ -134,8 +145,15 @@ function AdminHome() {
                 {pendingPosts.length > 0 ? (
                   pendingPosts.map((post) => (
                     <li key={post._id}>
-                      {post.title}
-                      <button onClick={() => setCurrentPost(post)}>View</button>
+                      {post.title}{" "}
+                      <button
+                        onClick={() => {
+                          console.log("Selected post:", post); // 👈 Add this line
+                          setCurrentPost(post);
+                        }}
+                      >
+                        View
+                      </button>
                     </li>
                   ))
                 ) : (
@@ -152,13 +170,24 @@ function AdminHome() {
           <div className="admin-modal">
             <div className="admin-modal-content">
               <h4>Post Details</h4>
-              <p><strong>Title:</strong> {currentPost.title}</p>
-              <p><strong>Author:</strong> {currentPost.userDetails?.username}</p>
-              <p><strong>Category:</strong> {currentPost.category}</p>
-              <p><strong>Content:</strong> {currentPost.content}</p>
+              <p>
+                <strong>Title:</strong> {currentPost.title}
+              </p>
+              <p>
+                <strong>Author:</strong> {currentPost.userDetails?.username}
+              </p>
+              <p>
+                <strong>Category:</strong> {currentPost.category}
+              </p>
+              <p>
+                <strong>Content:</strong> {currentPost.content}
+              </p>
               <div className="admin-modal-buttons">
                 <button onClick={() => handleApprove(currentPost._id)}>Approve</button>
-                <button onClick={() => handleDelete(currentPost._id)} className="delete-btn">Delete</button>
+                <button onClick={() => handleDelete(currentPost._id)} className="delete-btn">
+                  Delete
+                </button>
+                <button onClick={() => setCurrentPost(null)} className="close-btn">Close</button>
               </div>
             </div>
           </div>
